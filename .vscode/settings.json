@@ -1,0 +1,9 @@
+{
+    "java.project.sourcePaths": ["src"],
+    "java.project.outputPath": "bin",
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "/home/andras/Library/junit/junit-jupiter-api-5.8.1.jar",
+        "/home/andras/Library/junit/junit-platform-console-standalone-1.8.1.jar"
+    ]
+}
