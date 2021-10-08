@@ -4,32 +4,39 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Valami {
-    
-    public ArrayList<Employee> loadFile(){
-        ArrayList<Employee> employeeList = null;
+    ArrayList<Employee> employeeList;
+    FileReader fileReader;
+    Scanner scanner;
+
+    public Valami() {
+        initFile();
+        loadFile();
+    }
+
+    private void initFile(){
         try {
-            employeeList = tryLoadFile();
+            tryInitFile();
         } catch (FileNotFoundException e) {
             System.err.println("Hiba! A fájl nem található!");
         }
-        return employeeList;
     }
-    public ArrayList<Employee> tryLoadFile() throws FileNotFoundException {
-        ArrayList<Employee> employeeList = null;
-        FileReader fileReader = new FileReader("adat.txt");
-        Scanner scanner = new Scanner(fileReader);
-        employeeList = getEmployeesFromScanner(scanner);
-        scanner.close();
-        return employeeList;
+
+    private void tryInitFile()  throws FileNotFoundException {
+        this.fileReader = new FileReader("adat.txt");
+        this.scanner = new Scanner(fileReader);
     }
-    private ArrayList<Employee> getEmployeesFromScanner(Scanner scanner) {
-        ArrayList<Employee> employeeList = new ArrayList<>();
-        while(scanner.hasNextLine()) {
+
+    private void loadFile() {
+        genEmployeesFromScanner();
+        this.scanner.close();
+    }
+    
+    private void genEmployeesFromScanner() {
+        while(this.scanner.hasNextLine()) {
             String line = scanner.nextLine();
             Employee employee = getEmployeFromLine(line);
-            employeeList.add(employee);
+            this.employeeList.add(employee);
         }
-        return employeeList;
     }
 
     private Employee getEmployeFromLine(String line) {
